@@ -1,0 +1,2 @@
+class Homie < ApplicationRecord
+end
