@@ -6,11 +6,11 @@ module Types
       argument :elementary, Boolean, required: false
     end
 
-    def schools(min_gs_rating:, elementary:)
+    def schools(min_gs_rating:, elementary: nil)
       School.where(<<~SQL, gs_rating: min_gs_rating, elementary: elementary)
           gs_rating >= :gs_rating
         AND
-          (:elementary is null or elementary = :elementary)
+          (CAST(:elementary AS boolean) IS NULL OR elementary = :elementary)
       SQL
     end
 

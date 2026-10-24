@@ -12,3 +12,9 @@ Rails.application.config.assets.paths << Rails.root.join('node_modules')
 # application.js, application.css, and all non-JS/CSS in the app/assets
 # folder are already added.
 # Rails.application.config.assets.precompile += %w( admin.js admin.css )
+
+# graphiql-rails is a development-only gem, so its assets are declared here
+# instead of in app/assets/config/manifest.js (production precompile can't see them).
+if Rails.env.development?
+  Rails.application.config.assets.precompile += %w[graphiql/rails/application.css graphiql/rails/application.js]
+end
